@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <title>Pings || Real time server pings to client</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Oldenburg' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/font/stylesheet.css" />
+        <script>
+          var host = location.origin.replace(/^http/, 'ws')
+          var ws = new WebSocket(host);
+          ws.onmessage = function (event) {
+            var li = document.createElement('li');
+            li.innerHTML = JSON.parse(event.data);
+            document.querySelector('#pings').appendChild(li);
+          };
+        </script>
+    </head>
+    <body>
+        <div class="container">
+          <div class="header">
+            <span> Pings <sub>Real Time Pinging Between Server & Client</sub> </span>
+          </div>
+          <div class="inner" style="height:70%;">
+                <p class="pings">Pings Which are received from server in realtime starting from user connection</p>
+                <ul id='pings'></ul>
+            </div>
+        <div class="clr">&nbsp;</div>
+            <div class="bottom">
+              <div class="inner">
+                <p>Powered by NodeJS and Websockets. Developed by <a href="http://drreddy.herokuapp.com" target="none">drreddy</a></p>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>
